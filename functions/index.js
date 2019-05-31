@@ -34,6 +34,8 @@ exports.projectCreated = functions.firestore
     return createNotification(notification);
   });
 
+// exports.projectDeleted = functions.firestore.document
+
 //Function that will react to a new user being created
 exports.userJoined = functions.auth.user().onCreate(user => {
   return admin

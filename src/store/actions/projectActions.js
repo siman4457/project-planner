@@ -28,3 +28,22 @@ export const createProject = project => {
       });
   };
 };
+
+export const deleteProject = (project, docId) => {
+  return (dispatch, getState, { getFirestore }) => {
+    const firestore = getFirestore();
+
+    console.log("project in actions", docId);
+
+    let project_collection = firestore.collection("projects");
+    project_collection
+      .doc(docId)
+      .delete()
+      .then(() => {
+        dispatch({ type: "DELETE_PROJECT" });
+      })
+      .catch(err => {
+        dispatch({ type: "DELETE_PROJECT_ERROR", err: err });
+      });
+  };
+};

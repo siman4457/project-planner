@@ -10,6 +10,7 @@ const ProjectList = props => {
     <div className="project-list section">
       {projects &&
         projects.map(project => {
+          //console.log("id", project.id);
           return (
             <Link to={"/project/" + project.id} key={project.id}>
               <ProjectSummary project={project} />

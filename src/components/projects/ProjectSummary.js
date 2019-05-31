@@ -4,7 +4,6 @@ import moment from "moment";
 
 const ProjectSummary = props => {
   const { project } = props;
-  console.log("project", project);
   return (
     <div className="card z-depth-0 project-summary">
       <div className="card-content grey-text text-darken-3">
