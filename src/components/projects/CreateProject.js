@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createProject } from "../../store/actions/projectActions";
+import { Redirect } from "react-router-dom";
 
 //This is a class based component because we have to store what a user inputs into the text fields
 class CreateProject extends Component {
@@ -20,36 +21,49 @@ class CreateProject extends Component {
   };
   handleSubmit = e => {
     e.preventDefault(); //Prevents reload upon submit
-    //console.log(this.state);
     let proj = this.state;
     this.props.createProject(proj);
+    this.props.history.push("/"); //redirect to homepage after creating project
   };
 
   render() {
-    return (
-      <div className="container">
-        <form onSubmit={this.handleSubmit} className="white">
-          <h5 className="grey-text text-darken-3">Create New Project</h5>
-          <div className="input-field">
-            <label htmlFor="title">Title</label>
-            <input type="text" id="title" onChange={this.handleChange} />
-          </div>
-          <div className="input-field">
-            <label htmlFor="content">Project Content</label>
-            <textarea
-              id="content"
-              onChange={this.handleChange}
-              className="materialize-textarea"
-            />
-          </div>
-          <div className="input-field">
-            <button className="btn pink lighten-1 z-depth-0">Create</button>
-          </div>
-        </form>
-      </div>
-    );
+    const { auth } = this.props;
+    console.log("props", auth);
+
+    if (!auth.uid) {
+      return <Redirect to="/signin" />;
+    } else {
+      return (
+        <div className="container">
+          <form onSubmit={this.handleSubmit} className="white">
+            <h5 className="grey-text text-darken-3">Create New Project</h5>
+            <div className="input-field">
+              <label htmlFor="title">Title</label>
+              <input type="text" id="title" onChange={this.handleChange} />
+            </div>
+            <div className="input-field">
+              <label htmlFor="content">Project Content</label>
+              <textarea
+                id="content"
+                onChange={this.handleChange}
+                className="materialize-textarea"
+              />
+            </div>
+            <div className="input-field">
+              <button className="btn pink lighten-1 z-depth-0">Create</button>
+            </div>
+          </form>
+        </div>
+      );
+    }
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    auth: state.firebase.auth
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -58,6 +72,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(CreateProject);

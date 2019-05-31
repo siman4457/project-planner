@@ -6,24 +6,27 @@ import { connect } from "react-redux";
 
 //This Navbar component is a funcitonal component because we dont need to worry about state. Just display the Navbar!
 
-const Navbar = () => {
+const Navbar = props => {
+  const uid = props.auth.uid;
+  const { profile } = props;
   return (
     <nav className="nav-wrapper grey darken-3">
       <div className="container">
         <Link to="/" className="brand-logo">
           Planner
         </Link>
-        <SignedInLinks />
-        <SignedOutLinks />
+        {/* Show links based on whether a user is logged in or not */}
+        {uid ? <SignedInLinks profile={profile} /> : <SignedOutLinks />}
       </div>
     </nav>
   );
 };
 
 const mapStateToProps = state => {
-  console.log(state);
+  //console.log("state", state);
   return {
-    firebase: state.firebase
+    auth: state.firebase.auth,
+    profile: state.firebase.profile
   };
 };
 

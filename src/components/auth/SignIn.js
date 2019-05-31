@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { signIn } from "../../store/actions/authActions";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 //This is a class based component because we have to store what a user inputs into the text fields
 class SignIn extends Component {
@@ -26,6 +27,12 @@ class SignIn extends Component {
   };
 
   render() {
+    const authErr = this.props.authError;
+    const { auth } = this.props; //same as above
+
+    if (auth.uid) {
+      return <Redirect to="/" />;
+    }
     return (
       <div className="container">
         <form onSubmit={this.handleSubmit} className="white">
@@ -40,6 +47,9 @@ class SignIn extends Component {
           </div>
           <div className="input-field">
             <button className="btn pink lighten-1 z-depth-0">Login</button>
+            <div className="red-text center">
+              {authErr ? <p>Invalid login, try again lol</p> : null}
+            </div>
           </div>
         </form>
       </div>
@@ -47,13 +57,20 @@ class SignIn extends Component {
   }
 }
 
-const mapDispatchtoProps = dispatch => {
+const mapStateToProps = state => {
+  return {
+    authError: state.auth.authError,
+    auth: state.firebase.auth
+  };
+};
+
+const mapDispatchToProps = dispatch => {
   return {
     signIn: creds => dispatch(signIn(creds))
   };
 };
 
 export default connect(
-  null,
-  mapDispatchtoProps
+  mapStateToProps,
+  mapDispatchToProps
 )(SignIn);
