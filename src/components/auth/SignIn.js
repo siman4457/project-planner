@@ -22,7 +22,6 @@ class SignIn extends Component {
   handleSubmit = e => {
     e.preventDefault(); //Prevents reload upon submit
     let credentials = this.state;
-    console.log("login credentials entered: ", credentials);
     this.props.signIn(credentials);
   };
 

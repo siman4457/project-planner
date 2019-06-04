@@ -33,8 +33,6 @@ export const deleteProject = (project, docId) => {
   return (dispatch, getState, { getFirestore }) => {
     const firestore = getFirestore();
 
-    console.log("project in actions", docId);
-
     let project_collection = firestore.collection("projects");
     project_collection
       .doc(docId)
