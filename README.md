@@ -1,6 +1,12 @@
-A simple dashboard to help you and your team plan and keep track of your projects.
+# Project Planner
+## A simple dashboard to help you and your team plan and keep track of your projects.
+### Made with React, Redux, and Firebase
 
+![Screen Shot 2019-06-03 at 11 26 00 PM](https://user-images.githubusercontent.com/28658492/58851502-9bc2f500-8658-11e9-9219-9142165fff38.png)
 
+![Screen Shot 2019-06-03 at 11 30 14 PM](https://user-images.githubusercontent.com/28658492/58851501-9bc2f500-8658-11e9-8c2d-d80faadc7263.png)
+
+![Screen Shot 2019-06-03 at 11 30 03 PM](https://user-images.githubusercontent.com/28658492/58851500-9bc2f500-8658-11e9-9277-12118ecfe3b6.png)
 
 
 
