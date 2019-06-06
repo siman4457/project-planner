@@ -5,13 +5,13 @@ import { compose } from "redux";
 import { Redirect } from "react-router-dom";
 import moment from "moment";
 import { deleteProject } from "../../store/actions/projectActions";
+import { editProject } from "../../store/actions/projectActions";
+import EditProject from "./EditProject";
+import { Link } from "react-router-dom";
 
 class ProjectDetails extends Component {
-  // state = {
-  //   project: this.props.project
-  // };
-
   render() {
+    //console.log(this.props);
     const { project, auth, docId } = this.props;
 
     const handleDelete = e => {
@@ -19,6 +19,15 @@ class ProjectDetails extends Component {
       e.preventDefault();
       this.props.deleteProject(project, docId);
       this.props.history.push("/"); //redirect to homepage after creating project
+    };
+
+    //This should direct to the Edit project page
+    const handleEdit = e => {
+      e.preventDefault();
+      // console.log(e.target.project);
+      // this.props.history.push("/edit");
+      // this.props.editProject(project, docId);
+      // this.props.history.push("/");
     };
 
     if (!auth.uid) return <Redirect to="/signin" />;
@@ -36,6 +45,10 @@ class ProjectDetails extends Component {
               </div>
               <div>{moment(project.createdAt.toDate()).calendar()}</div>
               <div className="right-align">
+                <Link to={"/edit/" + docId} key={docId} project={project}>
+                  Edit
+                </Link>
+                &nbsp; &nbsp;
                 <button
                   onClick={handleDelete}
                   value={auth}

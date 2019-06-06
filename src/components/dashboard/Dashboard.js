@@ -10,7 +10,6 @@ import { Redirect } from "react-router-dom";
 
 class Dashboard extends Component {
   render() {
-    //console.log(this.props);
     const { projects, auth, notifications } = this.props; //get the projects object from the props
 
     //If there is no uid present, that means there is no user logged in

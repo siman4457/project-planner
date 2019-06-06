@@ -1,10 +1,6 @@
 //We need a initState to pass in the first time around
 const initState = {
-  projects: [
-    { id: "1", title: "help me find peach", content: "blah blach blah" },
-    { id: "2", title: "collect all the stars", content: "blah blach blah" },
-    { id: "3", title: "egg hunt with yoshi", content: "blah blach blah" }
-  ]
+  projects: [{ id: "1", title: "some title", content: "blah blach blah" }]
 };
 
 const projectReducer = (state = initState, action) => {
@@ -20,6 +16,12 @@ const projectReducer = (state = initState, action) => {
       return state;
 
     case "DELETE_PROJECT_ERROR":
+      return state; //not sure about this. might want to return the error
+
+    case "EDIT_PROJECT":
+      return state;
+
+    case "EDIT_PROJECT_ERROR":
       return state; //not sure about this. might want to return the error
 
     default:

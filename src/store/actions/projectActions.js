@@ -45,3 +45,28 @@ export const deleteProject = (project, docId) => {
       });
   };
 };
+
+export const editProject = (project, docId) => {
+  return (dispatch, getState, { getFirestore }) => {
+    const firestore = getFirestore();
+    const profile = getState().firebase.profile;
+    const uid = getState().firebase.auth.uid;
+
+    let project_collection = firestore.collection("projects");
+    project_collection
+      .doc(docId)
+      .update({
+        ...project,
+        authorFirstName: profile.firstName,
+        authorLastName: profile.lastName,
+        authorId: uid,
+        createdAt: new Date()
+      })
+      .then(() => {
+        dispatch({ type: "EDIT_PROJECT" });
+      })
+      .catch(err => {
+        dispatch({ type: "EDIT_PROJECT_ERROR", err: err });
+      });
+  };
+};
