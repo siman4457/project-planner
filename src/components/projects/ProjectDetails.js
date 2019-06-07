@@ -5,9 +5,9 @@ import { compose } from "redux";
 import { Redirect } from "react-router-dom";
 import moment from "moment";
 import { deleteProject } from "../../store/actions/projectActions";
-import { editProject } from "../../store/actions/projectActions";
-import EditProject from "./EditProject";
 import { Link } from "react-router-dom";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 class ProjectDetails extends Component {
   render() {
@@ -15,19 +15,35 @@ class ProjectDetails extends Component {
     const { project, auth, docId } = this.props;
 
     const handleDelete = e => {
-      alert("Are you sure you want to delete this project?");
+      //alert("Are you sure you want to delete this project?");
       e.preventDefault();
-      this.props.deleteProject(project, docId);
-      this.props.history.push("/"); //redirect to homepage after creating project
-    };
-
-    //This should direct to the Edit project page
-    const handleEdit = e => {
-      e.preventDefault();
-      // console.log(e.target.project);
-      // this.props.history.push("/edit");
-      // this.props.editProject(project, docId);
-      // this.props.history.push("/");
+      confirmAlert({
+        customUI: ({ onClose }) => {
+          return (
+            <div className="custom-ui">
+              <h1>Are you sure?</h1>
+              <p>Don't give up!</p>
+              <button
+                className="btn pink lighten-1 z-depth-0"
+                onClick={onClose}
+              >
+                No
+              </button>
+              &nbsp; &nbsp;
+              <button
+                className="btn pink lighten-1 z-depth-0"
+                onClick={() => {
+                  this.props.deleteProject(project, docId);
+                  onClose();
+                  this.props.history.push("/"); //redirect to homepage after creating project
+                }}
+              >
+                Yes
+              </button>
+            </div>
+          );
+        }
+      });
     };
 
     if (!auth.uid) return <Redirect to="/signin" />;
@@ -46,9 +62,9 @@ class ProjectDetails extends Component {
               <div>{moment(project.createdAt.toDate()).calendar()}</div>
               <div className="right-align">
                 <Link to={"/edit/" + docId} key={docId} project={project}>
-                  Edit
+                  <button className="btn pink lighten-1 z-depth-0">Edit</button>
                 </Link>
-                &nbsp; &nbsp;
+                &nbsp;
                 <button
                   onClick={handleDelete}
                   value={auth}
