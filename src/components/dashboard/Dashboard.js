@@ -10,7 +10,7 @@ import { Redirect } from "react-router-dom";
 
 class Dashboard extends Component {
   render() {
-    const { projects, auth, notifications } = this.props; //get the projects object from the props
+    const { projects, auth, notifications, uid } = this.props; //get the projects object from the props
 
     //If there is no uid present, that means there is no user logged in
     if (!auth.uid) {
@@ -23,7 +23,7 @@ class Dashboard extends Component {
         <div className="row">
           {/* This div will contain the project list */}
           <div className="col s12 m6">
-            <ProjectList projects={projects} />
+            <ProjectList projects={projects} uid={uid} />
           </div>
           {/* This div will contain the notifications */}
           <div className="col s12 m5 offset-m1">
@@ -37,10 +37,11 @@ class Dashboard extends Component {
 
 // We need to be able to read from the Redux store, so we need to
 // map our state from the store to our props in this component
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
   //Here, state refers to the state of our store
-  // console.log(state);
+  const uid = ownProps.match.params.id;
   return {
+    uid: uid,
     projects: state.firestore.ordered.projects,
     auth: state.firebase.auth,
     notifications: state.firestore.ordered.notifications

@@ -5,10 +5,11 @@ import { signOut } from "../../store/actions/authActions";
 
 //When a user is signed in, they will see these links in the nav bar
 const SignedInLinks = props => {
+  const { uid } = props;
   return (
     <ul className="right">
       <li>
-        <NavLink to="/create">New Project</NavLink>
+        <NavLink to={"/create/" + uid}>New Project</NavLink>
       </li>
       <li>
         <a href="/signin" onClick={props.signOut}>
@@ -26,7 +27,8 @@ const SignedInLinks = props => {
 
 const mapStateToProps = state => {
   return {
-    firebase: state.firebase
+    firebase: state.firebase,
+    uid: state.firebase.auth.uid
   };
 };
 

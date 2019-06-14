@@ -30,7 +30,7 @@ class SignIn extends Component {
     const { auth } = this.props; //same as above
 
     if (auth.uid) {
-      return <Redirect to="/" />;
+      return <Redirect to={"/dashboard/" + auth.uid} />;
     }
     return (
       <div className="container">

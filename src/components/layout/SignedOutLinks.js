@@ -6,6 +6,9 @@ const SignedOutLinks = () => {
   return (
     <ul className="right">
       <li>
+        <NavLink to="/demo">Demo</NavLink>
+      </li>
+      <li>
         <NavLink to="/signup">Sign Up</NavLink>
       </li>
       <li>

@@ -11,7 +11,6 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 
 class ProjectDetails extends Component {
   render() {
-    //console.log(this.props);
     const { project, auth, docId } = this.props;
 
     const handleDelete = e => {
@@ -60,8 +59,9 @@ class ProjectDetails extends Component {
                 Posted by {project.authorFirstName} {project.authorLastName}
               </div>
               <div>{moment(project.createdAt.toDate()).calendar()}</div>
+
               <div className="right-align">
-                <Link to={"/edit/" + docId} key={docId} project={project}>
+                <Link to={"/edit/" + docId} key={docId}>
                   <button className="btn pink lighten-1 z-depth-0">Edit</button>
                 </Link>
                 &nbsp;

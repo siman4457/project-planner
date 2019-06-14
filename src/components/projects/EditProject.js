@@ -12,8 +12,6 @@ class EditProject extends Component {
     content: ""
   };
 
-  contentRef = React.createRef;
-
   handleChange = e => {
     this.setState({
       /*using square brackets here so that we can dynamically update the 
@@ -25,11 +23,12 @@ class EditProject extends Component {
   };
 
   handleSubmit = e => {
-    e.preventDefault(); //Prevents reload upon submit
+    e.preventDefault();
     let localProject = this.state;
     let docId = this.props.docId;
     this.props.editProject(localProject, docId);
-    this.props.history.push("/"); //redirect to homepage after creating project
+    const projectDetailURL = "/project/" + docId;
+    this.props.history.push(projectDetailURL); //redirect to project detail page after edit
   };
 
   render() {
