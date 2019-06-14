@@ -20,10 +20,11 @@ class CreateProject extends Component {
     });
   };
   handleSubmit = e => {
+    const { auth, createProject } = this.props;
     e.preventDefault(); //Prevents reload upon submit
     let proj = this.state;
-    this.props.createProject(proj);
-    this.props.history.push("/"); //redirect to homepage after creating project
+    createProject(proj);
+    this.props.history.push("/dashboard/" + auth.uid); //redirect to authenticated user's dashboard after creating project
   };
 
   render() {

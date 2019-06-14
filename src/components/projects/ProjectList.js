@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import ProjectSummary from "../projects/ProjectSummary";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
 
 class ProjectList extends Component {
   render() {
@@ -11,7 +10,6 @@ class ProjectList extends Component {
       <div className="project-list section">
         {projects &&
           projects.map(project => {
-            console.log(project);
             if (project.authorId === uid) {
               return (
                 <Link to={"/project/" + project.id} key={project.id}>
@@ -19,6 +17,7 @@ class ProjectList extends Component {
                 </Link>
               );
             }
+            //return(<404Pafe/>)
           })}
       </div>
     );
