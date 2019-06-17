@@ -31,6 +31,10 @@ class EditProject extends Component {
     this.props.history.push(projectDetailURL); //redirect to project detail page after edit
   };
 
+  componentDidMount = () => {
+    console.log(this.props.projects);
+  };
+
   render() {
     const { project, auth } = this.props;
     if (!auth.uid) return <Redirect to="/signin" />;
