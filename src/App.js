@@ -9,7 +9,7 @@ import CreateProject from "./components/projects/CreateProject";
 import EditProject from "./components/projects/EditProject";
 
 //React version 16.8.6
-
+//Testing demo mode branch
 function App() {
   return (
     <BrowserRouter>
