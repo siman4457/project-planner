@@ -18,12 +18,12 @@ function App() {
         <header className="App-header">
           <Navbar />
           <Switch>
-            <Route exact path="/" component={Dashboard} />
             <Route exact path="/dashboard/:id" component={Dashboard} />
             {/* Need to be able to redirect to dashboard when path='/' and the user is logged in,
             otherwise the use gets redirected to signin */}
             <Route path="/project/:id" component={ProjectDetails} />
             <Route path="/demo" component={Demo} />
+            {/* <Route path="/" component={SignIn} /> */}
             <Route path="/signin" component={SignIn} />
             <Route path="/signup" component={SignUp} />
             <Route path="/create/:id" component={CreateProject} />

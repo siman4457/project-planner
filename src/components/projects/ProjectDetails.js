@@ -8,13 +8,14 @@ import { deleteProject } from "../../store/actions/projectActions";
 import { Link } from "react-router-dom";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import { Button } from "react-materialize";
 
 class ProjectDetails extends Component {
   render() {
     const { project, auth, docId } = this.props;
+    
 
     const handleDelete = e => {
-      //alert("Are you sure you want to delete this project?");
       e.preventDefault();
       confirmAlert({
         customUI: ({ onClose }) => {
@@ -34,7 +35,7 @@ class ProjectDetails extends Component {
                 onClick={() => {
                   this.props.deleteProject(project, docId);
                   onClose();
-                  this.props.history.push("/"); //redirect to homepage after creating project
+                  this.props.history.push("/dashboard/" + project.authorId); //redirect to homepage after creating project
                 }}
               >
                 Yes
@@ -61,9 +62,17 @@ class ProjectDetails extends Component {
               <div>{moment(project.createdAt.toDate()).calendar()}</div>
 
               <div className="right-align">
-                <Link to={"/edit/" + docId} key={docId}>
+                <Link to={{
+                  pathname:"/edit/" + docId,
+                  state: {
+                      title: project.title,
+                      content: project.content
+                    }
+                  }} 
+                key={docId}>
                   <button className="btn pink lighten-1 z-depth-0">Edit</button>
                 </Link>
+                {/* <Button className="btn pink lighten-1 z-depth-0" waves="light" node="a" href={"/edit/" + docId}>Edit</Button> */}
                 &nbsp;
                 <button
                   onClick={handleDelete}

@@ -12,6 +12,21 @@ class EditProject extends Component {
     content: ""
   };
 
+  
+  /*Setting the local state to the current project data
+    using react router to pass the state from the Project 
+    Deails component.
+  */
+  componentDidMount = () =>{
+    const title = this.props.location.state.title
+    const content = this.props.location.state.content
+    this.setState({
+      title: title,
+      content: content
+    })
+    console.log('test',this.state);
+  }
+
   handleChange = e => {
     this.setState({
       /*using square brackets here so that we can dynamically update the 
@@ -29,10 +44,6 @@ class EditProject extends Component {
     this.props.editProject(localProject, docId);
     const projectDetailURL = "/project/" + docId;
     this.props.history.push(projectDetailURL); //redirect to project detail page after edit
-  };
-
-  componentDidMount = () => {
-    console.log(this.props.projects);
   };
 
   render() {
