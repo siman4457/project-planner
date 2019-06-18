@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import SignedInLinks from "./SignedInLinks";
 import SignedOutLinks from "./SignedOutLinks";
 import { connect } from "react-redux";
-import SideNav from "./SideNav";
+import Sidebar from "./SideNav";
 
 //This Navbar component is a funcitonal component because we dont need to worry about state. Just display the Navbar!
 
@@ -21,7 +21,7 @@ const Navbar = props => {
             </Link>
 
             {/* Mobile Nav Bar */}
-            <SideNav />
+            <Sidebar />
           </div>
 
           {/* Show links based on whether a user is logged in or not */}

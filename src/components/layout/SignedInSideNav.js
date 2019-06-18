@@ -1,43 +1,46 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { signOut } from "../../store/actions/authActions";
-import { Link } from "react-router-dom";
+import { Button, SideNav, SideNavItem } from "react-materialize";
 
 //When a user is signed in, they will see these links in the nav bar
 const SignedInSideNav = props => {
-  const { uid, profile } = props;
+  const { uid } = props;
   return (
     <div>
-      <ul id="slide-out" className="sidenav">
-        <li className="side-nav-initials">
-          <NavLink to={"/dashboard/" + uid} className="btn blue lighten-1">
-            {profile.initials}
-          </NavLink>
-        </li>
+      <SideNav
+        trigger={
+          <Button flat>
+            <i className="material-icons">menu</i>
+          </Button>
+        }
+        options={{ closeOnClick: true }}
+      >
+        {/* <SideNavItem userView user={{
+                background: 'https://placeimg.com/640/480/tech',
+                image: 'static/media/react-materialize-logo.824c6ea3.svg',
+                name: 'John Doe',
+                …
+            }} /> */}
+        <SideNavItem href={"/dashboard/" + uid} icon="dashboard">
+          Dashboard
+        </SideNavItem>
 
-        <li>
-          <Link to={"/dashboard/" + uid}>
-            <i className="material-icons">dashboard</i>Dashboard
-          </Link>
-        </li>
+        <SideNavItem href={"/create/" + uid} icon="edit">
+          New Project
+        </SideNavItem>
 
-        <li>
-          <NavLink to={"/create/" + uid}>
-            <i className="material-icons">edit</i>New Project
-          </NavLink>
-        </li>
+        <SideNavItem divider />
 
-        <li>
-          <div className="divider" />
-        </li>
-
-        <li>
-          <a href="/signin" onClick={props.signOut}>
-            <i className="material-icons">arrow_back</i>Log Out
-          </a>
-        </li>
-      </ul>
+        <SideNavItem
+          waves
+          href="/signin"
+          icon="arrow_back"
+          onClick={props.signOut}
+        >
+          Sign Out
+        </SideNavItem>
+      </SideNav>
     </div>
   );
 };

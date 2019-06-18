@@ -32,6 +32,7 @@ class Demo extends Component {
                   Hey, lets take a look around.
                 </h1>
                 <p className="center">
+                  {/* <Button className="btn-floating pink lighten-1 z-depth-0 pulse" tooltip="I am a tooltip"></Button> */}
                   <button
                     className="btn-floating pink lighten-1 z-depth-0 pulse "
                     onClick={this.handleSubmit}
