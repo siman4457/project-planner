@@ -2,20 +2,26 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 //When a user is NOT signed in, they will see these links in the nav bar
-const SignedOutLinks = () => {
+const SignedOutSideNav = () => {
   return (
-    <ul className="right hide-on-med-and-down">
+    <ul id="slide-out" className="sidenav">
       <li>
-        <NavLink to="/demo">Demo</NavLink>
+        <NavLink to="/signin">Login</NavLink>
       </li>
+
       <li>
         <NavLink to="/signup">Sign Up</NavLink>
       </li>
+
       <li>
-        <NavLink to="/signin">Login</NavLink>
+        <div className="divider" />
+      </li>
+
+      <li>
+        <NavLink to="/demo">Demo</NavLink>
       </li>
     </ul>
   );
 };
 
-export default SignedOutLinks;
+export default SignedOutSideNav;

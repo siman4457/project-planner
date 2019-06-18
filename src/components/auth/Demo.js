@@ -1,93 +1,75 @@
-// import React, { Component } from "react";
-// import { signUp } from "../../store/actions/authActions";
-// import { connect } from "react-redux";
-// import { Redirect } from "react-router-dom";
+import React, { Component } from "react";
+import { signIn } from "../../store/actions/authActions";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
-// //This is a class based component because we have to store what a user inputs into the text fields
-// class Demo extends Component {
-//   state = {
-//     email: "",
-//     password: "",
-//     firstName: "",
-//     lastName: ""
-//   };
+//This is a class based component because we have to store what a user inputs into the text fields
+class Demo extends Component {
+  state = {
+    email: "demo@planner.com",
+    password: "123456"
+  };
 
-//   handleChange = e => {
-//     this.setState({
-//       /*using square brackets here so that we can dynamically update the
-//         object property (the property is unkown upfront at runtime). This will
-//         give us the id for whichever input field is being updated (the email or password)
-//         */
-//       [e.target.id]: e.target.value
-//     });
-//   };
-//   handleSubmit = e => {
-//     e.preventDefault(); //Prevents reload upon submit
-//     const newUser = this.state;
+  handleSubmit = e => {
+    e.preventDefault(); //Prevents reload upon submit
+    let credentials = this.state;
+    this.props.signIn(credentials);
+  };
 
-//     this.props.signUp(newUser);
-//   };
+  render() {
+    const { auth } = this.props;
 
-//   render() {
-//     const { auth, authError } = this.props;
-//     if (auth.uid) {
-//       return <Redirect to={"/dashboard/" + auth.uid} />;
-//     } else {
-//       return (
-//         <div className="container">
-//           <form onSubmit={this.handleSubmit} className="white">
-//             <h5 className="grey-text text-darken-3">Sign Up</h5>
+    if (auth.uid) {
+      return <Redirect to={"/dashboard/" + auth.uid} />;
+    }
+    return (
+      <div className="container">
+        <div className="row">
+          <div className="col s12 m6 offset-m3">
+            <div className="card z-depth-0 demo-card">
+              <div className="card-content grey-text text-darken-3">
+                <h1 className="card-title center">
+                  Hey, lets take a look around.
+                </h1>
+                <p className="center">
+                  <button
+                    className="btn-floating pink lighten-1 z-depth-0 pulse "
+                    onClick={this.handleSubmit}
+                  >
+                    <i className="large material-icons">arrow_forward</i>
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
 
-//             <div className="input-field">
-//               <label htmlFor="firstName">First Name</label>
-//               <input type="text" id="firstName" onChange={this.handleChange} />
-//             </div>
+const mapStateToProps = (state, ownProps) => {
+  //   const isDemo = () => {
+  //     const url = ownProps.match.url;
+  //     if (url === "/demo") {
+  //       return true;
+  //     }
+  //   };
 
-//             <div className="input-field">
-//               <label htmlFor="lastName">Last Name</label>
-//               <input type="text" id="lastName" onChange={this.handleChange} />
-//             </div>
+  return {
+    authError: state.auth.authError,
+    auth: state.firebase.auth
+    //isDemo: isDemo()
+  };
+};
 
-//             <div className="input-field">
-//               <label htmlFor="email">Email</label>
-//               <input type="email" id="email" onChange={this.handleChange} />
-//             </div>
+const mapDispatchToProps = dispatch => {
+  return {
+    signIn: creds => dispatch(signIn(creds))
+  };
+};
 
-//             <div className="input-field">
-//               <label htmlFor="password">Password</label>
-//               <input
-//                 type="password"
-//                 id="password"
-//                 onChange={this.handleChange}
-//               />
-//             </div>
-//             <div className="input-field">
-//               <button className="btn pink lighten-1 z-depth-0">Sign Up</button>
-//               <div className="red-text center">
-//                 {authError ? <p>{authError}</p> : null}
-//               </div>
-//             </div>
-//           </form>
-//         </div>
-//       );
-//     }
-//   }
-// }
-
-// const mapStateToProps = state => {
-//   return {
-//     auth: state.firebase.auth,
-//     authError: state.auth.authError
-//   };
-// };
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     signUp: newUser => dispatch(signUp(newUser))
-//   };
-// };
-
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(Demo);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Demo);

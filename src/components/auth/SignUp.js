@@ -5,24 +5,19 @@ import { Redirect } from "react-router-dom";
 
 //This is a class based component because we have to store what a user inputs into the text fields
 class SignUp extends Component {
-  /******
-  There's propbably a better way to 
-  make the demo user account than to 
-  set it as the initial state 
-  ********/
   state = {
-    email: "test@temp.com",
-    password: "123456",
-    firstName: "Demo",
-    lastName: "User"
+    email: "",
+    password: "",
+    firstName: "",
+    lastName: ""
   };
 
-  handleDemo = e => {
-    e.preventDefault();
-    console.log(this.state);
-    const demoUser = this.state;
-    this.props.signUp(demoUser);
-  };
+  // handleDemo = e => {
+  //   e.preventDefault();
+  //   console.log(this.state);
+  //   const demoUser = this.state;
+  //   this.props.signUp(demoUser);
+  // };
 
   handleChange = e => {
     this.setState({

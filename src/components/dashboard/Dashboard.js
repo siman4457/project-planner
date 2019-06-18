@@ -40,6 +40,7 @@ class Dashboard extends Component {
 const mapStateToProps = (state, ownProps) => {
   //Here, state refers to the state of our store
   const uid = ownProps.match.params.id;
+
   return {
     uid: uid,
     projects: state.firestore.ordered.projects,

@@ -37,9 +37,12 @@ textarea.materialize-textarea:focus:not([readonly]) {
   box-shadow: none;
 }
 
-/* input[type="text"]:not(.browser-default):focus:not([readonly]) + label,
-textarea.materialize-textarea:focus:not([readonly]) + label,
-input[type="email"]:not(.browser-default):focus:not([readonly]) + label,
-input[type="password"]:not(.browser-default):focus:not([readonly]) + label {
-  color: #ec407a !important;
-} */
+.demo-card {
+  margin-top: 60px;
+  height: 200px;
+}
+
+.side-nav-initials {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
