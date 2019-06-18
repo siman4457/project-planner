@@ -10,7 +10,7 @@ const SignedInSideNav = props => {
     <div>
       <SideNav
         trigger={
-          <Button flat>
+          <Button flat white>
             <i className="material-icons">menu</i>
           </Button>
         }

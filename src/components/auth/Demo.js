@@ -25,11 +25,11 @@ class Demo extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col s12 m6 offset-m3">
+          <div className="col s12 m8 offset-m2">
             <div className="card z-depth-0 demo-card">
               <div className="card-content grey-text text-darken-3">
                 <h1 className="card-title center">
-                  Hey, lets take a look around.
+                  Hi there! Lets take a look around.
                 </h1>
                 <p className="center">
                   {/* <Button className="btn-floating pink lighten-1 z-depth-0 pulse" tooltip="I am a tooltip"></Button> */}
